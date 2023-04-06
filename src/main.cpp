@@ -6,6 +6,8 @@
 
 int main ()
 {
+ Exercice1();
+// Exercice3();
 
     Point2D P = Point2D("A", 1, 1);
     std::vector<Point2D> points =
