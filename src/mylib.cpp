@@ -1,6 +1,72 @@
 #include "mylib.hpp"
-
 #include <random>
+
+
+void Exercice1()
+{
+
+}
+
+void formeCreuse(int x, int y)
+{
+
+}
+
+void Exercice2()
+{
+    std::vector<Point2D> points;
+    int dist = 100;
+    int n = 0;
+
+    // Générer aléatoirement des positions pour les points
+    for (int i = 0; i < 10; i++) {
+        Point2D p;
+        p.x = randomInt(0, 99);
+        p.y = randomInt(0, 99);
+        points.push_back(p);
+    }
+
+    // Choisir un point P aléatoirement dans le tableau
+    Point2D P = points[randomInt(0, n-1)];
+
+    // Trouver les plus proches voisins de P
+    plusProcheVoisin(points, P, dist);
+}
+
+float distanceManhattan(Point2D p1, Point2D p2)
+{
+    return abs(p2.x-p1.x) + abs(p2.y-p1.y);
+}
+
+
+float distanceEuclidienne(Point2D p1, Point2D p2)
+{
+     return std::sqrt(std::pow(p2.x-p1.x, 2) + std::pow(p2.y-p1.y, 2));
+}
+
+void plusProcheVoisin(std::vector<Point2D> points, Point2D P, int dist)
+{
+    //Déclare un vecteur de type Point2D appelé ppv
+    std::vector<Point2D> ppv;
+
+    //Parcours chaque point du tableau points
+    for (int i = 0; i < points.size(); i++)
+    {
+        Point2D p = points.at(i);
+        if (distanceEuclidienne(p, P) <= dist)
+        {
+            ppv.push_back(p);
+        }
+    }
+
+    //Parcours chaque point dans le vecteur ppv
+    std::cout << "Les plus proches voisins de P sont : " << std::endl;
+    for (int i = 0; i < ppv.size(); i++)
+    {
+        Point2D p = ppv.at(i);
+        std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
+    }
+}
 
 void Exercice3()
 {
@@ -32,7 +98,7 @@ void Exercice3()
                 std::cout << "Invalid guess. Please enter a number between " << min << " and " << max << std::endl;
             }
 
-            std::cout << "You still have" << remainingTries-- << "tries" << std::endl;
+            std::cout << "You still have " << remainingTries-- << " tries" << std::endl;
 
             if (guess == secretNumber)
             {
@@ -103,25 +169,3 @@ bool playAgain()
 
     return answer == 'y' || answer == 'Y';
 }
-
-void formeCreuse(int x, int y)
-{
-
-}
-
-float distanceManhattan(Point2D p1, Point2D p2)
-{
-    return 0.0f;
-}
-
-
-float distanceEuclidienne(Point2D p1, Point2D p2)
-{
-    return 0.0f;
-}
-
-void plusProcheVoisin(std::vector<Point2D> points, Point2D P, int dist)
-{
-
-}
-
