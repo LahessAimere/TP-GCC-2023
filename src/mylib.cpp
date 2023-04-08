@@ -2,6 +2,64 @@
 
 #include <random>
 
+void Exercice3()
+{
+    int min = 1;
+    int max = 100;
+    int minTries = 5;
+    int maxTries = 10;
+
+    bool play = true;
+
+    while (play)
+    {
+        int secretNumber = randomInt(min, max);
+        int remainingTries = randomInt(minTries, maxTries);
+        // Est le nombre proposé par le joueur
+        int guess;
+        bool victory = false;
+
+        std::cout << "I have a secret number between " << min << " and " << max << std::endl;
+        std::cout << "You have " << remainingTries << " tries to guess it" << std::endl;
+
+        while (remainingTries > 0 && !victory)
+        {
+            std::cout << "Enter your guess: ";
+            std::cin >> guess;
+
+            if (guess < min || guess > max)
+            {
+                std::cout << "Invalid guess. Please enter a number between " << min << " and " << max << std::endl;
+            }
+
+            std::cout << "You still have" << remainingTries-- << "tries" << std::endl;
+
+            if (guess == secretNumber)
+            {
+                victory = true;
+            }
+            else
+            {
+                plusOuMoins(guess - secretNumber);
+            }
+        }
+
+        if (victory)
+        {
+            std::cout << "Congratulations! You have found the secret number " << secretNumber << " in " 
+            << (maxTries - remainingTries) << " attempts" << std::endl;
+        }
+        else
+        {
+            std::cout << "Sorry, you did not find the secret number " << secretNumber << std::endl;
+        }
+
+        play = playAgain();
+    }
+
+    std::cout << "Thank you for playing!" << std::endl;
+
+}
 
 int randomInt(int min, int max)
 {
@@ -11,58 +69,44 @@ int randomInt(int min, int max)
     return dis (gen);
 }
 
-void Exercice1()
+void plusOuMoins(int findNumber)
 {
-    int nbchar =0;
-    int nblignes = 0;
-
-    std::cout << "Veuillez entrer le nombre de lignes à afficher: ";
-    std::cin >> nblignes;
-    std::cout << "Veuillez entrer le nombre de caractères à afficher: ";
-    std::cin >> nbchar;
-
-    for (int i = 0; i < nblignes; i++)
+    if (findNumber < 0)
     {
-        int creuse1 = 0;
-        int creuse2 = 0;
+        std::cout << "More" << std::endl;
+    }
+    else
+    {
+        std::cout << "Less" << std::endl;
+    }
+}
 
-        std::cout << "Veuillez entrer la disposition du caractère * pour la ligne " << (i + 1);
-        std::string disposition;
-        std::cin >> disposition;
+bool playAgain()
+{
+    char answer;
+    bool validAnswer = false;
+     while (!validAnswer) 
+     {
+        std::cout << "Do you want to play again? (y/n): ";
+        std::cin >> answer;
 
-  
-
-        formeCreuse(creuse1, creuse2);
+        if (answer == 'y' || answer == 'Y') {
+            validAnswer = true;
+        } 
+        if (answer == 'n' || answer == 'N') {
+            validAnswer = true;
+        } 
+        else {
+            std::cout << "Invalid answer. Please enter between (y/n):" << std::endl;
+        }
     }
 
-    std::cout << std::endl;
+    return answer == 'y' || answer == 'Y';
 }
 
 void formeCreuse(int x, int y)
 {
 
-     for (int i = 1; i <= x; i++) {
-        for (int j = 1; j <= x; j++) {
-            if (i == 1 || i == x || j == 1 || j == x) 
-            {
-                std::cout << "*";
-            } else {
-                std::cout << "  ";
-            }
-        }
-     }
-    
-
-    for (int i = 1; i <= y; i++) {
-        for (int j = 1; j <= y; j++) {
-            if (i == 1 || i == y || j == 1 || j == y) 
-            {
-                std::cout << "*";
-            } else {
-                std::cout << "  ";
-            }
-        }
-    }
 }
 
 float distanceManhattan(Point2D p1, Point2D p2)
@@ -81,7 +125,3 @@ void plusProcheVoisin(std::vector<Point2D> points, Point2D P, int dist)
 
 }
 
-void plusOuMoins()
-{
-
-}
