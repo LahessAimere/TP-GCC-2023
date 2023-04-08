@@ -34,21 +34,24 @@ void Exercice2()
 {
     std::vector<Point2D> points;
     int dist = 100;
-    int n = 0;
+    int n = 10;
 
     // Générer aléatoirement des positions pour les points
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < n; i++) {
         Point2D p;
         p.x = randomInt(0, 99);
         p.y = randomInt(0, 99);
         points.push_back(p);
     }
-
+    
     // Choisir un point P aléatoirement dans le tableau
     Point2D P = points[randomInt(0, n-1)];
 
     // Trouver les plus proches voisins de P
     plusProcheVoisin(points, P, dist);
+
+    std::cout << "Exemple of point : " << P << std::endl;
+    std::cout << "Exemple of point : " << points.at(n) << std::endl;
 }
 
 float distanceManhattan(Point2D p1, Point2D p2)
