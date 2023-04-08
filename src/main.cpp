@@ -6,7 +6,7 @@
 int main ()
 {
     //Exercice1();
-    Exercice2();
+    //Exercice2();
     //Exercice3();
 
 /*

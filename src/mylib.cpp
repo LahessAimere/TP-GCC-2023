@@ -4,12 +4,30 @@
 
 void Exercice1()
 {
+    int characters = 0;
+    int lignes = 0;
 
+    std::cout << "Give the number of charater you want per line" << std::endl;
+    std::cin >> characters;
+    std::cout << "Give the number of lines" << std::endl;
+    std::cin >> lignes;
+    formeCreuse(characters, lignes);
 }
 
 void formeCreuse(int x, int y)
 {
-
+  for (int i = 0; i < x; ++i) {
+        for (int j = 0; j < y; ++j) {
+            if (i == 0 || i == x-1){
+                std::cout << '*';
+            } else if (j == 0 || j == y-1){
+                std::cout << '*';
+            } else{
+                std::cout << ' ';
+            }
+        }
+        std::cout << std::endl;
+    }
 }
 
 void Exercice2()
